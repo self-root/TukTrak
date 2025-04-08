@@ -1,0 +1,12 @@
+#ifndef TUKTRACK_CORE_GLOBAL_H
+#define TUKTRACK_CORE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(TUKTRACK_CORE_LIBRARY)
+#define TUKTRACK_CORE_EXPORT Q_DECL_EXPORT
+#else
+#define TUKTRACK_CORE_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // TUKTRACK_CORE_GLOBAL_H
