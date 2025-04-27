@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="AppTheme" parent="">
+    <item name="android:statusBarColor">#ffffff</item>
+    <item name="android:navigationBarColor">#FF03DAC5</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+</style>
+</resources>
+
+
+

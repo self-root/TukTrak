@@ -1,12 +1,43 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QStyleHints>
 #include "corecontroller.h"
+#include "uicontroller.h"
+#include "models/driverslistmodel.h"
+#include "models/driverdetailmodel.h"
+#include "models/driverdepositsettingmodel.h"
+#include "models/driverdepositmodel.h"
+#include "models/tukdetailmodel.h"
+#include "models/dashboardmodel.h"
+//#include <QCoreApplication>
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
-    CoreController controller;
+    QApplication app(argc, argv);
+    app.styleHints()->setMousePressAndHoldInterval(200);
+    QCoreApplication::setOrganizationName("iroot");
+    QCoreApplication::setApplicationName("TukTrack");
+    TukTukListModel tukListModel;
+    DriversListModel driverListModel;
+    DriverDetailModel driverDetailModel;
+    DriverDepositSettingModel depositSettingListModel;
+    DriverDepositModel depositListModel;
+    TukDetailModel tukDetailModel;
+    CoreController controller(&tukListModel);
+    DashboardModel dashboardModel(driverListModel, tukListModel, depositListModel, tukDetailModel);
+    UiController uiController;
     QQmlApplicationEngine engine;
+    QQmlContext *context = engine.rootContext();
+    context->setContextProperty("controller", &controller);
+    context->setContextProperty("tukListModel", &tukListModel);
+    context->setContextProperty("driverListModel", &driverListModel);
+    context->setContextProperty("depositListModel", &depositListModel);
+    context->setContextProperty("driverDetail", &driverDetailModel);
+    context->setContextProperty("uiController", &uiController);
+    context->setContextProperty("depositSettingListModel", &depositSettingListModel);
+    context->setContextProperty("tukDetailModel", &tukDetailModel);
+    context->setContextProperty("dashboardModel", &dashboardModel);
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,

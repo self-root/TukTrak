@@ -2,11 +2,16 @@
 #define CORECONTROLLER_H
 
 #include "tuktrack_core_global.h"
+#include "models/tuktuklistmodel.h"
+#include <QObject>
 
-class TUKTRACK_CORE_EXPORT CoreController
+class TUKTRACK_CORE_EXPORT CoreController : public QObject
 {
+    Q_OBJECT
 public:
-    CoreController();
+    CoreController(TukTukListModel *tukListModel, QObject *parent = nullptr);
+private:
+    const TukTukListModel &tukTukListModel;
 };
 
 #endif // CORECONTROLLER_H

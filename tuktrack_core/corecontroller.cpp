@@ -1,6 +1,9 @@
 #include "corecontroller.h"
 #include <QDebug>
 
-CoreController::CoreController() {
-    qDebug() << "It works!";
+CoreController::CoreController(TukTukListModel *tukListModel, QObject *parent)
+    : QObject(parent)
+    , tukTukListModel(*tukListModel)
+{
+
 }
