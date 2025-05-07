@@ -27,9 +27,9 @@ Each tuk-tuk typically has **two drivers** (day and night shifts). After their s
 
 ## 📸 Screenshots
 
-![Screenshot 1](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-11-32-218_org.iroot.tuktrack.jpg?raw=true)
-![Screenshot 2](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-11-55-663_org.iroot.tuktrack.jpg?raw=true)
-![Screenshot 3](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-12-22-452_org.iroot.tuktrack.jpg?raw=true)
+| Home & Dashboard | Driver detail screen | Tuc tuc list |
+|----------|-----------|---------|
+| ![Home & Dashboard](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-11-32-218_org.iroot.tuktrack.jpg?raw=true) | ![driver detail](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-11-55-663_org.iroot.tuktrack.jpg?raw=true) | ![Tuc tuc list](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-12-22-452_org.iroot.tuktrack.jpg?raw=true) |
 
 ---
 
