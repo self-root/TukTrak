@@ -37,6 +37,9 @@ qt_add_qml_module(appTukTrack
         Screens/Deposits.qml
         Screens/More.qml
         Screens/TukTukDetail.qml
+        Screens/DailyDeposits.qml
+        Screens/MaintenanceRecord.qml
+        Screens/About.qml
 
         Components/DateChooser.qml
         Components/TextIconBtn.qml

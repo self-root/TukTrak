@@ -25,6 +25,18 @@ ApplicationWindow {
             stackView.push("qrc:/qt/qml/TukTrack/Screens/TukTukDetail.qml")
         }
 
+        function onGoDailyDeposits() {
+            stackView.push("qrc:/qt/qml/TukTrack/Screens/DailyDeposits.qml")
+        }
+
+        function onGoMaintenanceRecord() {
+            stackView.push("qrc:/qt/qml/TukTrack/Screens/MaintenanceRecord.qml")
+        }
+
+        function onGoAbout() {
+            stackView.push("qrc:/qt/qml/TukTrack/Screens/About.qml")
+        }
+
         function onGoBack() {
             stackView.pop()
         }

@@ -13,6 +13,9 @@ signals:
     void goDriverDetails();
     void goBack();
     void goTukDetail();
+    void goDailyDeposits();
+    void goMaintenanceRecord();
+    void goAbout();
 };
 
 #endif // UICONTROLLER_H
