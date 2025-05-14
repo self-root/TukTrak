@@ -22,6 +22,7 @@ public:
     DriverDepositList getDepositList(const QString &tukNumber);
 
     DriverDepositList getDepositList(const QDate &date) const;
+    DriverDepositList getDepositList(const QDate &date, const QString &shift) const;
 
     void add(DriverDepositSetting &depositSetting) const;
 

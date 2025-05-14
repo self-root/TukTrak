@@ -10,6 +10,9 @@
 #include "models/driverdepositmodel.h"
 #include "models/tukdetailmodel.h"
 #include "models/dashboardmodel.h"
+//#include "models/dailydepositlistmodel.h"
+#include "models/depositdatelistmodel.h"
+#include "models/dailydepositmodels.h"
 //#include <QCoreApplication>
 
 int main(int argc, char *argv[])
@@ -24,6 +27,8 @@ int main(int argc, char *argv[])
     DriverDepositSettingModel depositSettingListModel;
     DriverDepositModel depositListModel;
     TukDetailModel tukDetailModel;
+    DepositDateListModel depositDateList;
+    DailyDepositModels dailyDepositModels;
     CoreController controller(&tukListModel);
     DashboardModel dashboardModel(driverListModel, tukListModel, depositListModel, tukDetailModel);
     UiController uiController;
@@ -38,6 +43,8 @@ int main(int argc, char *argv[])
     context->setContextProperty("depositSettingListModel", &depositSettingListModel);
     context->setContextProperty("tukDetailModel", &tukDetailModel);
     context->setContextProperty("dashboardModel", &dashboardModel);
+    context->setContextProperty("depositDateList", &depositDateList);
+    context->setContextProperty("dailyDepositModels", &dailyDepositModels);
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,

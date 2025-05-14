@@ -28,6 +28,7 @@ Page {
             text: title
             onClicked: {
                 if (menuId === 0) {
+                    depositDateList.loadData()
                     uiController.goDailyDeposits()
                 }
                 else if (menuId === 1) {

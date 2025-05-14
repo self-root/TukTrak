@@ -10,12 +10,17 @@ class TUKTRACK_CORE_EXPORT DailyDepositListModel : public DriverDepositModel
     Q_OBJECT
     Q_PROPERTY(QDate currentDate READ currentDate WRITE setCurrentDate NOTIFY currentDateChanged FINAL)
 public:
-    explicit DailyDepositListModel(QObject *parent = nullptr);
+    enum Shift{
+        Day,
+        Night
+    };
+    explicit DailyDepositListModel(Shift shift, QObject *parent = nullptr);
 
     QDate currentDate() const;
     void setCurrentDate(const QDate &newCurrentDate);
 
 private:
+    Shift mShift;
     QDate mCurrentDate;
     // DriverDepositModel interface
 

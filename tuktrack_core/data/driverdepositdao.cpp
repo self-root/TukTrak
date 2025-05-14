@@ -147,6 +147,44 @@ DriverDepositList DriverDepositDao::getDepositList(const QDate &date) const
     return depositList;
 }
 
+DriverDepositList DriverDepositDao::getDepositList(const QDate &date, const QString &shift) const
+{
+    DriverDepositList depositList = DriverDepositList(new std::vector<std::unique_ptr<DriverDeposit>>);
+    QSqlQuery query(mDatabase);
+    query.prepare(R"(
+        SELECT * FROM driver_deposit
+        INNER JOIN driver ON driver.id = driver_deposit.driver_id
+        INNER JOIN rickshaw ON rickshaw.id = driver_deposit.rickshaw_id
+        INNER JOIN rickshaw_driver ON rickshaw_driver.driver_id = driver.id
+        WHERE driver_deposit.date = :date AND rickshaw_driver.shift = :shift
+    )");
+
+    query.bindValue(":date", date.toString(Qt::ISODate));
+    query.bindValue(":shift", shift);
+
+    if (!query.exec())
+    {
+        qDebug() << "Unable to get driver depisits: " << query.lastError().text();
+        return depositList;
+    }
+
+    while (query.next())
+    {
+        std::unique_ptr<DriverDeposit> deposit(new DriverDeposit);
+        deposit->setId(query.value("driver_deposit.id").toInt());
+        deposit->setDriverId(query.value("driver.id").toInt());
+        deposit->setDriverName(query.value("driver.first_name").toString());
+        deposit->setTukId(query.value("rickshaw.id").toInt());
+        deposit->setTukNumber(query.value("rickshaw.registration_number").toString());
+        deposit->setDateOfDeposit(QDate::fromString(query.value("driver_deposit.date").toString(), Qt::ISODate));
+        deposit->setAmount(query.value("driver_deposit.amount_deposited").toDouble());
+        deposit->setNote(query.value("driver_deposit.note").toString());
+        depositList->push_back(std::move(deposit));
+    }
+
+    return depositList;
+}
+
 void DriverDepositDao::add(DriverDepositSetting &depositSetting) const
 {
     QSqlQuery query(mDatabase);

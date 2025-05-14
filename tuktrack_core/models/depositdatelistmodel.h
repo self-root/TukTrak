@@ -19,7 +19,8 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 public slots:
-    void loadDate();
+    void loadData();
+    QDate dateAt(int index);
 
 private:
     QVector<QDate> depositsDate;

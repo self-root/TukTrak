@@ -1,7 +1,8 @@
 #include "dailydepositlistmodel.h"
 #include "data/databaseaccessmanager.h"
-DailyDepositListModel::DailyDepositListModel(QObject *parent)
-    : DriverDepositModel(DepositListType::Daily, parent)
+DailyDepositListModel::DailyDepositListModel(Shift shift, QObject *parent)
+    : mShift(shift)
+    , DriverDepositModel(DepositListType::Daily, parent)
 {
     QObject::connect(this, &DailyDepositListModel::currentDateChanged, this, &DailyDepositListModel::loadDeposit);
 }
@@ -23,6 +24,16 @@ void DailyDepositListModel::setCurrentDate(const QDate &newCurrentDate)
 void DailyDepositListModel::loadDeposit()
 {
     beginResetModel();
-    depositList = DatabaseAccessManager::instance()->mDepositDao.getDepositList(mCurrentDate);
+    switch (mShift) {
+    case Day:
+        depositList = DatabaseAccessManager::instance()->mDepositDao.getDepositList(mCurrentDate, "day");
+        break;
+    case Night:
+        depositList = DatabaseAccessManager::instance()->mDepositDao.getDepositList(mCurrentDate, "night");
+        break;
+    default:
+        depositList = DatabaseAccessManager::instance()->mDepositDao.getDepositList(mCurrentDate);
+        break;
+    }
     endResetModel();
 }

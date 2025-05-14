@@ -21,11 +21,20 @@ QVariant DepositDateListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-void DepositDateListModel::loadDate()
+void DepositDateListModel::loadData()
 {
     beginResetModel();
     depositsDate = DatabaseAccessManager::instance()->mDepositDao.depositsDate();
     endResetModel();
+}
+
+QDate DepositDateListModel::dateAt(int index)
+{
+    if (index >= 0 && index < depositsDate.size())
+    {
+        return depositsDate.at(index);
+    }
+    return QDate();
 }
 
 

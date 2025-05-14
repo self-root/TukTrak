@@ -42,6 +42,7 @@ add_library(tuktrack_core SHARED
     models/maintenancetypemodel.h models/maintenancetypemodel.cpp
     models/dailydepositlistmodel.h models/dailydepositlistmodel.cpp
     models/depositdatelistmodel.h models/depositdatelistmodel.cpp
+    models/dailydepositmodels.h models/dailydepositmodels.cpp
 
 
 )
