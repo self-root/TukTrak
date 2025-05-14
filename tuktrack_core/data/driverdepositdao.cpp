@@ -111,6 +111,42 @@ DriverDepositList DriverDepositDao::getDepositList(const QString &tukNumber)
 
 }
 
+DriverDepositList DriverDepositDao::getDepositList(const QDate &date) const
+{
+    DriverDepositList depositList = DriverDepositList(new std::vector<std::unique_ptr<DriverDeposit>>);
+    QSqlQuery query(mDatabase);
+    query.prepare(R"(
+        SELECT * FROM driver_deposit
+        INNER JOIN driver ON driver.id = driver_deposit.driver_id
+        INNER JOIN rickshaw ON rickshaw.id = driver_deposit.rickshaw_id
+        WHERE driver_deposit.date = :date
+    )");
+
+    query.bindValue(":date", date.toString(Qt::ISODate));
+
+    if (!query.exec())
+    {
+        qDebug() << "Unable to get driver depisits: " << query.lastError().text();
+        return depositList;
+    }
+
+    while (query.next())
+    {
+        std::unique_ptr<DriverDeposit> deposit(new DriverDeposit);
+        deposit->setId(query.value("driver_deposit.id").toInt());
+        deposit->setDriverId(query.value("driver.id").toInt());
+        deposit->setDriverName(query.value("driver.first_name").toString());
+        deposit->setTukId(query.value("rickshaw.id").toInt());
+        deposit->setTukNumber(query.value("rickshaw.registration_number").toString());
+        deposit->setDateOfDeposit(QDate::fromString(query.value("driver_deposit.date").toString(), Qt::ISODate));
+        deposit->setAmount(query.value("driver_deposit.amount_deposited").toDouble());
+        deposit->setNote(query.value("driver_deposit.note").toString());
+        depositList->push_back(std::move(deposit));
+    }
+
+    return depositList;
+}
+
 void DriverDepositDao::add(DriverDepositSetting &depositSetting) const
 {
     QSqlQuery query(mDatabase);
@@ -282,4 +318,22 @@ QVector<QPair<QString, double>> DriverDepositDao::monthlyRevenueBetween(const QD
     }
 
     return monthlyRevenue;
+}
+
+QVector<QDate> DriverDepositDao::depositsDate() const
+{
+    QVector<QDate> dates;
+    QSqlQuery query(mDatabase);
+    QString queryString("SELECT date FROM driver_deposit GROUP BY date ORDER BY date DESC");
+    if (!query.exec(queryString))
+    {
+        qDebug() << "Could not get depost date list: " << query.lastError().text();
+        return dates;
+    }
+
+    while (query.next())
+    {
+        dates.push_back(QDate::fromString(query.value("date").toString(), Qt::ISODate));
+    }
+    return dates;
 }

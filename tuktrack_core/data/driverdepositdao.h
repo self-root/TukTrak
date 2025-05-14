@@ -21,6 +21,8 @@ public:
 
     DriverDepositList getDepositList(const QString &tukNumber);
 
+    DriverDepositList getDepositList(const QDate &date) const;
+
     void add(DriverDepositSetting &depositSetting) const;
 
     void add(DriverDeposit &deposit) const;
@@ -38,6 +40,9 @@ public:
     double totalRevenueBetween(const QDate &start, const QDate &end);
 
     QVector<QPair<QString, double>> monthlyRevenueBetween(const QDate &startDate, const QDate &endDate);
+
+    QVector<QDate> depositsDate() const;
+
 private:
     QSqlDatabase &mDatabase;
 signals:

@@ -40,6 +40,8 @@ add_library(tuktrack_core SHARED
     models/revenuechartmodel.h models/revenuechartmodel.cpp
     androidapi.h androidapi.cpp
     models/maintenancetypemodel.h models/maintenancetypemodel.cpp
+    models/dailydepositlistmodel.h models/dailydepositlistmodel.cpp
+    models/depositdatelistmodel.h models/depositdatelistmodel.cpp
 
 
 )

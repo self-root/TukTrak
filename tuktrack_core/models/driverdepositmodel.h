@@ -12,7 +12,8 @@ class TUKTRACK_CORE_EXPORT DriverDepositModel : public QAbstractListModel
 public:
     enum DepositListType{
         ByDriver,
-        ByTukTuk
+        ByTukTuk,
+        Daily
     };
     enum Roles{
         DateRole = Qt::UserRole + 1,
@@ -32,14 +33,14 @@ public:
 
 public slots:
     void loadDeposit(int driverId);
-    void loadDeposit();
+    virtual void loadDeposit();
     void addDeposit(int driverId, int tukId, const QVariantMap data);
     void updateDeposit(int index, const QVariantMap data);
     void removeDeposit(int index);
     void setDriverId(int driverId);
     void setTukNumber(const QString &tukNumber);
 
-private:
+protected:
     DriverDepositList depositList;
     //DriverDepositSettingModel &depositSettingModel;
     DepositListType listType;
