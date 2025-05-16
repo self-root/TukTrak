@@ -22,6 +22,7 @@ public:
         NoteRole,
         HasDepositLeftRole,
         DriverName,
+        DriverId,
     };
     explicit DriverDepositModel(DepositListType depositListType = DepositListType::ByDriver, QObject *parent = nullptr);
 

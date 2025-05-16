@@ -89,8 +89,9 @@ Page {
                 source:  tukCountRect
                 verticalOffset: 0
                 horizontalOffset: 0
-                radius: 6
-                samples: 13
+                radius: 4
+                samples:  9
+                color: "#aa000000"
             }
 
             Rectangle{
@@ -145,8 +146,9 @@ Page {
                 source:  driverCountRect
                 verticalOffset: 0
                 horizontalOffset: 0
-                radius: 6
-                samples: 13
+                radius: 4
+                samples:  9
+                color: "#aa000000"
             }
 
             Rectangle{
@@ -197,8 +199,9 @@ Page {
                 source:  totalRevenueRect
                 verticalOffset: 0
                 horizontalOffset: 0
-                radius: 6
-                samples: 13
+                radius: 4
+                samples:  9
+                color: "#aa000000"
             }
 
             Rectangle{
@@ -247,8 +250,9 @@ Page {
                 source:  totalexpenseRect
                 verticalOffset: 0
                 horizontalOffset: 0
-                radius: 6
-                samples: 13
+                radius: 4
+                samples:  9
+                color: "#aa000000"
             }
 
             Rectangle{
@@ -297,8 +301,9 @@ Page {
                 anchors.fill: maintenanceListViewRect
                 verticalOffset: 0
                 horizontalOffset: 0
-                radius: 6
-                samples: 13
+                radius: 4
+                samples:  9
+                color: "#aa000000"
             }
 
             Rectangle{
@@ -441,8 +446,9 @@ Page {
                 anchors.fill: revenueChartRect
                 verticalOffset: 0
                 horizontalOffset: 0
-                radius: 6
-                samples: 13
+                radius: 4
+                samples:  9
+                color: "#aa000000"
             }
 
             Rectangle{

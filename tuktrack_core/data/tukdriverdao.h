@@ -21,6 +21,8 @@ public:
 
     TukDriverList getDrivers(int tukId) const;
 
+    TukDriverList getDrivers(const QString &shift) const;
+
     std::unique_ptr<TukDriver> getDriver(int id) const;
 
     std::unique_ptr<TukDriverSetting> getDriverSetting(int driverId) const;

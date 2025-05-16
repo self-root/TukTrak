@@ -75,6 +75,42 @@ TukDriverList TukDriverDao::getDrivers(int tukId) const
     return list;
 }
 
+TukDriverList TukDriverDao::getDrivers(const QString &shift) const
+{
+    TukDriverList list(new std::vector<std::unique_ptr<TukDriver>>);
+
+    QSqlQuery query(mDatabase);
+    query.prepare(R"(
+        SELECT * FROM driver
+        INNER JOIN rickshaw_driver ON rickshaw_driver.driver_id = driver.id
+        WHERE rickshaw_driver.shift = :shift
+        ORDER BY driver.first_name
+    )");
+    query.bindValue(":shift", shift);
+
+    if (!query.exec())
+    {
+        qDebug() << "Unable to get drivers from db: " << query.lastError().text();
+        return list;
+    }
+
+    while (query.next())
+    {
+        std::unique_ptr<TukDriver> driver(new TukDriver);
+        driver->setId(query.value("id").toInt());
+        driver->setFirstName(query.value("first_name").toString());
+        driver->setLastName(query.value("last_name").toString());
+        driver->setPhoneNumber(query.value("phone").toString());
+        driver->setIdNumber(query.value("id_number").toString());
+        driver->setActive(query.value("active").toBool());
+        driver->setIdPhoto(query.value("id_photo").toString());
+
+        list->push_back(std::move(driver));
+    }
+
+    return list;
+}
+
 std::unique_ptr<TukDriver> TukDriverDao::getDriver(int id) const
 {
     std::unique_ptr<TukDriver> driver(new TukDriver);

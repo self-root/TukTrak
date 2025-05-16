@@ -39,4 +39,10 @@ Page {
             }
         }
     }
+
+    Text {
+        id: about
+        anchors.centerIn: parent
+        text: qsTr("TukTrack")
+    }
 }

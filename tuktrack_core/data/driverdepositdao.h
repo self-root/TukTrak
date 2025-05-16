@@ -44,6 +44,8 @@ public:
 
     QVector<QDate> depositsDate() const;
 
+    std::unique_ptr<DriverDeposit> getDeposit(int driverId, const QDate &date) const;
+
 private:
     QSqlDatabase &mDatabase;
 signals:

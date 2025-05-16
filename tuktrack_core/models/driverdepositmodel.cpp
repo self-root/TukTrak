@@ -154,5 +154,6 @@ QHash<int, QByteArray> DriverDepositModel::roleNames() const
     roles[NoteRole] = "note";
     roles[HasDepositLeftRole] = "hasDepositLeft";
     roles[DriverName] = "driverName";
+    roles[DriverId] = "driverId";
     return roles;
 }
