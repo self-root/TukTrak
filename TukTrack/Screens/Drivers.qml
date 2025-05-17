@@ -267,11 +267,11 @@ Page {
             DropShadow{
                 source: contentRect
                 anchors.fill: contentRect
-                verticalOffset: 0
                 horizontalOffset: 0
-                radius: 6
-                samples: 13
-                color:  "#aa000000"
+                verticalOffset: 0
+                radius: 4
+                samples: 9
+                color: "#aa000000"
             }
 
             background: Rectangle{

@@ -62,6 +62,11 @@ void MaintenanceListModel::loadData()
             maintenanceList = DatabaseAccessManager::instance()->mMaintenanceDao.getPastMaintenances(mTukId);
         else
             maintenanceList = DatabaseAccessManager::instance()->mMaintenanceDao.getPastMaintenances();
+        break;
+    }
+    case DateRange: {
+        maintenanceList = DatabaseAccessManager::instance()->mMaintenanceDao.getPastMaintenances(startDate, endDate);
+        break;
     }
     default:
         break;

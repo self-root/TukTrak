@@ -261,6 +261,46 @@ MaintenanceList MaintenanceDao::getPastMaintenances(int tukId) const
     return list;
 }
 
+MaintenanceList MaintenanceDao::getPastMaintenances(const QDate &startDate, const QDate &endDate) const
+{
+    QDate today = QDate::currentDate();
+    MaintenanceList list(new std::vector<std::unique_ptr<TukMaintenance>>);
+    QSqlQuery query(mDatabase);
+    query.prepare(R"(
+        SELECT * FROM maintenance
+        INNER JOIN rickshaw ON rickshaw_id = rickshaw.id
+        WHERE performed_date BETWEEN :startDate AND :endDate
+        ORDER BY performed_date DESC
+    )");
+    query.bindValue(":startDate", startDate.toString(Qt::ISODate));
+    query.bindValue(":endDate", endDate.toString(Qt::ISODate));
+
+    if (!query.exec())
+    {
+        qDebug() << "Could not get TukMaintenance list fro db: " << query.lastError().text();
+        return list;
+    }
+
+    while (query.next())
+    {
+        std::unique_ptr<TukMaintenance> maintenance(new TukMaintenance);
+        maintenance->setId(query.value("maintenance.id").toInt());
+        maintenance->setMaintenanceType(query.value("maintenance_type").toString());
+        maintenance->setDescription(query.value("description").toString());
+        maintenance->setScheduledDate(QDate::fromString(query.value("scheduled_date").toString(), Qt::ISODate));
+        maintenance->setPerformedDate(QDate::fromString(query.value("performed_date").toString(), Qt::ISODate));
+        maintenance->setReccuring(query.value("is_recurring").toBool());
+        maintenance->setReccurenceDays(query.value("recurrence_days").toInt());
+        maintenance->setCost(query.value("cost").toDouble());
+        maintenance->setTukNumber(query.value("rickshaw.registration_number").toString());
+        maintenance->setTukId(query.value("rickshaw.id").toInt());
+
+        list->push_back(std::move(maintenance));
+    }
+
+    return list;
+}
+
 double MaintenanceDao::maintenanceCostBetween(const QDate &startDate, const QDate &endDate)
 {
     QSqlQuery query(mDatabase);
@@ -347,4 +387,28 @@ QVector<QPair<QString, int> > MaintenanceDao::getMaintenanceTypes()
     }
 
     return maintenanceTypes;
+}
+
+QVector<QPair<QString, double> > MaintenanceDao::maintenanceCostByTukTuk(const QDate &startDate, const QDate &endDate)
+{
+    QVector<QPair<QString, double>> maintenanceCost;
+
+    QSqlQuery query(mDatabase);
+    query.prepare(R"(
+        SELECT registration_number, SUM(cost) AS total_cost FROM maintenance
+        INNER JOIN rickshaw ON rickshaw.id = maintenance.rickshaw_id
+        WHERE performed_date BETWEEN :startDate AND :endDate
+        GROUP BY registration_number
+    )");
+    query.bindValue(":startDate", startDate.toString(Qt::ISODate));
+    query.bindValue(":endDate", endDate.toString(Qt::ISODate));
+
+    if (!query.exec())
+        qDebug() << "Error getting maintenance cost by tuctuc: " << query.lastError().text();
+
+    while (query.next()) {
+        maintenanceCost.push_back({query.value("registration_number").toString(), query.value("total_cost").toDouble()});
+    }
+
+    return maintenanceCost;
 }

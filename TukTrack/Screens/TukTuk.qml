@@ -191,9 +191,9 @@ Page {
                 anchors.fill: itemContentRect
                 horizontalOffset: 0
                 verticalOffset: 0
-                radius: 6
-                samples: 13
-                color:  "#aa000000"
+                radius: 4
+                samples: 9
+                color: "#aa000000"
             }
 
             background: Rectangle{

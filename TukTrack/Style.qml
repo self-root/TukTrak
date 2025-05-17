@@ -5,7 +5,7 @@ Item {
     readonly property string robotFont: robotoF.name
     readonly property string webFont: webF.name
     readonly property string primary: "#fca311"
-    readonly property string accent: "#023047"
+    readonly property string accent: "#003566"//"#023047"
 
     FontLoader{
             id: robotoF

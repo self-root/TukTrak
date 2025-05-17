@@ -25,9 +25,11 @@ public:
     MaintenanceList getScheduledMaintenances(int tukId) const;
     MaintenanceList getPastMaintenances() const;
     MaintenanceList getPastMaintenances(int tukId) const;
+    MaintenanceList getPastMaintenances(const QDate &startDate, const QDate &endDate) const;
     double maintenanceCostBetween(const QDate &startDate, const QDate &endDate);
     QVector<QPair<QString, double>> monthlyMaintenanceCostBetween(const QDate &startDate, const QDate &endDate);
     QVector<QPair<QString, int>> getMaintenanceTypes();
+    QVector<QPair<QString, double>> maintenanceCostByTukTuk(const QDate &startDate, const QDate &endDate);
 private:
     QSqlDatabase &mDatabase;
 signals:

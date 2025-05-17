@@ -8,6 +8,9 @@
 class RevenueChartModel : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int totalMaintenance READ totalMaintenance WRITE setTotalMaintenance NOTIFY totalMaintenanceChanged FINAL)
+
+    Q_PROPERTY(double totalMaintenanceCost READ totalMaintenanceCost WRITE setTotalMaintenanceCost NOTIFY totalMaintenanceCostChanged FINAL)
 public:
     struct Data
     {
@@ -27,9 +30,23 @@ public:
 
     Q_INVOKABLE void loadData();
 
+    Q_INVOKABLE void loadData(const QDate &startDate, const QDate &endDate);
+
+    int totalMaintenance() const;
+    void setTotalMaintenance(int newTotalMaintenance);
+
+    double totalMaintenanceCost() const;
+    void setTotalMaintenanceCost(double newTotalMaintenanceCost);
+
 private:
     QMap<QString, Data> mapData;
+    int mTotalMaintenance = 0;
+    double mTotalMaintenanceCost = 0;
+
+
 signals:
+    void totalMaintenanceChanged();
+    void totalMaintenanceCostChanged();
 };
 
 #endif // REVENUECHARTMODEL_H

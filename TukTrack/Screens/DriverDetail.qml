@@ -578,7 +578,7 @@ Page {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.preferredWidth: 150
                 placeholderText: "Date versement"
-                readOnly: false
+                readOnly: true
                 text: Qt.formatDate(depositDateChoserPopup.selected_date, "dd/MM/yyyy")
                 onPressed: {
                     depositDateChoserPopup.open()

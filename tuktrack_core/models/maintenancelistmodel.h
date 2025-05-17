@@ -13,6 +13,7 @@ public:
     enum ListType{
         FutureMaintenace = 0,
         PastMaintenance,
+        DateRange,
         All
     };
     enum Roles{
@@ -34,7 +35,11 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-private:
+    QDate startDate;
+
+    QDate endDate;
+
+protected:
     MaintenanceList maintenanceList;
     ListType mListType;
     int mTukId = -1;
