@@ -7,6 +7,7 @@
 #include "models/detailedmaintenancelistmodel.h"
 #include "models/revenuechartmodel.h"
 #include "models/maintenancecostbytukmodel.h"
+#include "models/maintenancecostbytypemodel.h"
 
 class TUKTRACK_CORE_EXPORT MaintenanceRecordController : public QObject
 {
@@ -20,6 +21,8 @@ class TUKTRACK_CORE_EXPORT MaintenanceRecordController : public QObject
     Q_PROPERTY(RevenueChartModel *revenueChartModel READ getRevenueChartModel CONSTANT FINAL)
 
     Q_PROPERTY(MaintenanceCostByTukModel *maintenanceCostByTuk READ getMaintenanceCostByTuk CONSTANT FINAL)
+
+    Q_PROPERTY(MaintenanceCostByTypeModel *maintenanceCostByType READ getMaintenanceCostByType CONSTANT FINAL)
 public:
     explicit MaintenanceRecordController(QObject *parent = nullptr);
     QDate startDate() const;
@@ -33,6 +36,8 @@ public:
 
     MaintenanceCostByTukModel *getMaintenanceCostByTuk() const;
 
+    MaintenanceCostByTypeModel *getMaintenanceCostByType() const;
+
 public slots:
     void dateRangeChanged();
 
@@ -42,6 +47,7 @@ private:
     QDate mEndDate;
     RevenueChartModel *revenueChartModel = nullptr;
     MaintenanceCostByTukModel *maintenanceCostByTuk = nullptr;
+    MaintenanceCostByTypeModel *maintenanceCostByType = nullptr;
 
 signals:
     void startDateChanged();

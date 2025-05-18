@@ -35,8 +35,6 @@ void RevenueChartModel::loadData()
     QDate startDate  = endDate.addMonths(-4);
     QVector<QPair<QString, double>> monthlyRevenue = DatabaseAccessManager::instance()->mDepositDao.monthlyRevenueBetween(startDate, endDate);
     QVector<QPair<QString, double>> monthlyExpenses = DatabaseAccessManager::instance()->mMaintenanceDao.monthlyMaintenanceCostBetween(startDate, endDate);
-    qDebug() << monthlyExpenses;
-    qDebug() << monthlyRevenue;
     for (auto pair : monthlyRevenue)
     {
         if (mapData.contains(pair.first))
@@ -68,11 +66,12 @@ void RevenueChartModel::loadData(const QDate &startDate, const QDate &endDate)
 {
     QVector<QPair<QString, double>> monthlyRevenue = DatabaseAccessManager::instance()->mDepositDao.monthlyRevenueBetween(startDate, endDate);
     QVector<QPair<QString, double>> monthlyExpenses = DatabaseAccessManager::instance()->mMaintenanceDao.monthlyMaintenanceCostBetween(startDate, endDate);
-    qDebug() << monthlyExpenses;
-    qDebug() << monthlyRevenue;
+    double tempTotalRevenue = 0;
+    double tempTotalExpense = 0;
     mapData.clear();
     for (auto pair : monthlyRevenue)
     {
+        tempTotalRevenue += pair.second;
         if (mapData.contains(pair.first))
             mapData[pair.first].revenue = pair.second;
         else
@@ -86,6 +85,7 @@ void RevenueChartModel::loadData(const QDate &startDate, const QDate &endDate)
 
     for (auto pair : monthlyExpenses)
     {
+        tempTotalExpense += pair.second;
         if (mapData.contains(pair.first))
             mapData[pair.first].expense = pair.second;
         else
@@ -96,6 +96,9 @@ void RevenueChartModel::loadData(const QDate &startDate, const QDate &endDate)
         }
 
     }
+    setTotalMaintenance(monthlyExpenses.size());
+    setTotalMaintenanceCost(tempTotalExpense);
+    setTotalRevenue(tempTotalRevenue);
 }
 
 int RevenueChartModel::totalMaintenance() const
@@ -122,5 +125,18 @@ void RevenueChartModel::setTotalMaintenanceCost(double newTotalMaintenanceCost)
         return;
     mTotalMaintenanceCost = newTotalMaintenanceCost;
     emit totalMaintenanceCostChanged();
+}
+
+double RevenueChartModel::totalRevenue() const
+{
+    return mTotalRevenue;
+}
+
+void RevenueChartModel::setTotalRevenue(double newTotalRevenue)
+{
+    if (qFuzzyCompare(mTotalRevenue, newTotalRevenue))
+        return;
+    mTotalRevenue = newTotalRevenue;
+    emit totalRevenueChanged();
 }
 

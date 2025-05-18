@@ -557,14 +557,15 @@ Page {
                         anchors.bottom: parent.bottom
                         anchors.margins: 6
                         model: tukDetailModel.pastMaintenanceListModel
+                        clip: true
 
                         delegate: ItemDelegate{
                             width: pastMaintenanceListView.width
-                            height: 30
+                            //height: 30
                             contentItem: RowLayout{
                                 id: rowLayout2
-                                anchors.left: parent.left
-                                anchors.right: parent.right
+                                //anchors.left: parent.left
+                                //anchors.right: parent.right
                                 //height: d.height
                                 Label{
                                     Layout.preferredWidth: 110

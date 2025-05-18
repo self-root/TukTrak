@@ -9,8 +9,8 @@ class RevenueChartModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int totalMaintenance READ totalMaintenance WRITE setTotalMaintenance NOTIFY totalMaintenanceChanged FINAL)
-
     Q_PROPERTY(double totalMaintenanceCost READ totalMaintenanceCost WRITE setTotalMaintenanceCost NOTIFY totalMaintenanceCostChanged FINAL)
+    Q_PROPERTY(double totalRevenue READ totalRevenue WRITE setTotalRevenue NOTIFY totalRevenueChanged FINAL)
 public:
     struct Data
     {
@@ -38,15 +38,19 @@ public:
     double totalMaintenanceCost() const;
     void setTotalMaintenanceCost(double newTotalMaintenanceCost);
 
+    double totalRevenue() const;
+    void setTotalRevenue(double newTotalRevenue);
+
 private:
     QMap<QString, Data> mapData;
     int mTotalMaintenance = 0;
     double mTotalMaintenanceCost = 0;
-
+    double mTotalRevenue = 0;
 
 signals:
     void totalMaintenanceChanged();
     void totalMaintenanceCostChanged();
+    void totalRevenueChanged();
 };
 
 #endif // REVENUECHARTMODEL_H

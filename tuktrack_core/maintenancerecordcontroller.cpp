@@ -5,6 +5,7 @@ MaintenanceRecordController::MaintenanceRecordController(QObject *parent)
     , maintenanceList( new DetailedMaintenanceListModel())
     , revenueChartModel(new RevenueChartModel)
     , maintenanceCostByTuk(new MaintenanceCostByTukModel)
+    , maintenanceCostByType(new MaintenanceCostByTypeModel)
 {
     QObject::connect(this, &MaintenanceRecordController::startDateChanged, this, [&](){
         maintenanceList->startDate = mStartDate;
@@ -51,6 +52,12 @@ void MaintenanceRecordController::dateRangeChanged()
 {
     maintenanceList->loadData();
     maintenanceCostByTuk->loadData(mStartDate, mEndDate);
+    maintenanceCostByType->loadData(mStartDate, mEndDate);
+}
+
+MaintenanceCostByTypeModel *MaintenanceRecordController::getMaintenanceCostByType() const
+{
+    return maintenanceCostByType;
 }
 
 MaintenanceCostByTukModel *MaintenanceRecordController::getMaintenanceCostByTuk() const

@@ -46,6 +46,8 @@ add_library(tuktrack_core SHARED
     maintenancerecordcontroller.h maintenancerecordcontroller.cpp
     models/detailedmaintenancelistmodel.h models/detailedmaintenancelistmodel.cpp
     models/maintenancecostbytukmodel.h models/maintenancecostbytukmodel.cpp
+    models/maintenancecostbytypemodel.h models/maintenancecostbytypemodel.cpp
+
 
 
 )

@@ -399,6 +399,7 @@ QVector<QPair<QString, double> > MaintenanceDao::maintenanceCostByTukTuk(const Q
         INNER JOIN rickshaw ON rickshaw.id = maintenance.rickshaw_id
         WHERE performed_date BETWEEN :startDate AND :endDate
         GROUP BY registration_number
+        ORDER BY total_cost ASC
     )");
     query.bindValue(":startDate", startDate.toString(Qt::ISODate));
     query.bindValue(":endDate", endDate.toString(Qt::ISODate));
@@ -408,6 +409,30 @@ QVector<QPair<QString, double> > MaintenanceDao::maintenanceCostByTukTuk(const Q
 
     while (query.next()) {
         maintenanceCost.push_back({query.value("registration_number").toString(), query.value("total_cost").toDouble()});
+    }
+
+    return maintenanceCost;
+}
+
+QVector<QPair<QString, double> > MaintenanceDao::maintenanceCostByType(const QDate &startDate, const QDate &endDate)
+{
+    QVector<QPair<QString, double>> maintenanceCost;
+
+    QSqlQuery query(mDatabase);
+    query.prepare(R"(
+        SELECT maintenance_type, SUM(cost) AS total_cost FROM maintenance
+        WHERE performed_date BETWEEN :startDate AND :endDate
+        GROUP BY maintenance_type
+        ORDER BY total_cost ASC
+    )");
+    query.bindValue(":startDate", startDate.toString(Qt::ISODate));
+    query.bindValue(":endDate", endDate.toString(Qt::ISODate));
+
+    if (!query.exec())
+        qDebug() << "Error getting maintenance cost by type: " << query.lastError().text();
+
+    while (query.next()) {
+        maintenanceCost.push_back({query.value("maintenance_type").toString(), query.value("total_cost").toDouble()});
     }
 
     return maintenanceCost;

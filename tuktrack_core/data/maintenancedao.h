@@ -30,6 +30,7 @@ public:
     QVector<QPair<QString, double>> monthlyMaintenanceCostBetween(const QDate &startDate, const QDate &endDate);
     QVector<QPair<QString, int>> getMaintenanceTypes();
     QVector<QPair<QString, double>> maintenanceCostByTukTuk(const QDate &startDate, const QDate &endDate);
+    QVector<QPair<QString, double>> maintenanceCostByType(const QDate &startDate, const QDate &endDate);
 private:
     QSqlDatabase &mDatabase;
 signals:
