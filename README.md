@@ -27,9 +27,9 @@ Each tuk-tuk typically has **two drivers** (day and night shifts). After their s
 
 ## 📸 Screenshots
 
-| Home & Dashboard | Driver detail screen | Tuc tuc list |
+| Home & Dashboard | Driver detail screen | Tuc tuc list | Daily deposits | Maintenance record |
 |----------|-----------|---------|
-| ![Home & Dashboard](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-11-32-218_org.iroot.tuktrack.jpg?raw=true) | ![driver detail](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-11-55-663_org.iroot.tuktrack.jpg?raw=true) | ![Tuc tuc list](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-12-22-452_org.iroot.tuktrack.jpg?raw=true) |
+| ![Home & Dashboard](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-11-32-218_org.iroot.tuktrack.jpg?raw=true) | ![driver detail](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-11-55-663_org.iroot.tuktrack.jpg?raw=true) | ![Tuc tuc list](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-04-28-10-12-22-452_org.iroot.tuktrack.jpg?raw=true) | ![Daily deposit](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-05-18-13-35-17-630_org.iroot.tuktrack.jpg?raw=true) | ![Maintenance record](https://github.com/self-root/TukTrak/blob/master/Screenshots/Screenshot_2025-05-18-18-23-10-874_org.iroot.tuktrack.jpg?raw=true) |
 
 ---
 
