@@ -8,23 +8,24 @@ Page {
         model: ListModel{
             ListElement{
                 title: "Daily Deposits"
-                menuIcon: ""
+                menuIcon: "qrc:/images/images/deposit.png"
                 menuId: 0
             }
             ListElement{
                 title: "Maintenance record"
-                menuIcon: ""
+                menuIcon: "qrc:/images/images/data-visualization.png"
                 menuId: 1
             }
             ListElement{
                 title: "About"
-                menuIcon: ""
+                menuIcon: "qrc:/images/images/info-button.png"
                 menuId: 2
             }
         }
         delegate: ItemDelegate{
             width: parent.width
-            icon: menuIcon
+            icon.source: menuIcon
+            //icon.height: 32
             text: title
             onClicked: {
                 if (menuId === 0) {

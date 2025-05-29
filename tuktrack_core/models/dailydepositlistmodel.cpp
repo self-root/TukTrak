@@ -104,7 +104,7 @@ QVariant DailyDepositListModel::data(const QModelIndex &index, int role) const
     case HasDepositLeftRole:
         return hasAmountLeft;
     case DriverName:
-        return driver.firstName();
+        return driver.lastName() + " " + driver.firstName();
     case DriverId:
         return driver.id();
     default:

@@ -206,11 +206,12 @@ Page {
 
                             delegate: ItemDelegate{
                                 width: nightDepositListView.width
-                                height: 30
+                                //height: 30
 
                                 background: Rectangle{
                                     width: nightDepositListView.width
-                                    height: 28
+                                    //height: 28
+                                    height: parent.height
                                     anchors.verticalCenter: parent.verticalCenter
                                     color: hasDepositLeft ? "#f79d65" : "white"
                                 }
@@ -218,6 +219,7 @@ Page {
                                 contentItem: RowLayout{
                                     Label{
                                         Layout.fillWidth: true
+                                        wrapMode: Label.Wrap
                                         verticalAlignment: Text.AlignVCenter
                                         text: driverName
                                     }
@@ -344,11 +346,12 @@ Page {
 
                             delegate: ItemDelegate{
                                 width: nightDepositListView.width
-                                height: 30
+                                //height: 30
 
                                 background: Rectangle{
                                     width: dayDepositListView.width
-                                    height: 28
+                                    //height: 28
+                                    height: parent.height
                                     anchors.verticalCenter: parent.verticalCenter
                                     color: hasDepositLeft ? "#f79d65" : "white"
                                 }
@@ -356,6 +359,7 @@ Page {
                                 contentItem: RowLayout{
                                     Label{
                                         Layout.fillWidth: true
+                                        wrapMode: Label.Wrap
                                         verticalAlignment: Text.AlignVCenter
                                         text: driverName
                                     }

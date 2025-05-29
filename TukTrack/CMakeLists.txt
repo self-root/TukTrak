@@ -55,6 +55,9 @@ qt_add_resources(appTukTrack "images"
         images/tuc-tuc.png
         images/expenses.png
         images/money.png
+        images/deposit.png
+        images/info-button.png
+        images/data-visualization.png
 )
 
 qt_add_resources(appTukTrack "fonts"

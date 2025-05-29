@@ -68,7 +68,7 @@ Page {
                     }
 
                     Text {
-                        text: "TukTrack v1.1.0"
+                        text: "TukTrack v1.1.1"
                         font.pixelSize: 20
                         font.bold: true
                         horizontalAlignment: Text.AlignHCenter
